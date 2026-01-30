@@ -1,6 +1,7 @@
+import { ClerkProvider } from '@clerk/clerk-expo';
+import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { ActivityIndicator } from "react-native";
-import { useFonts } from "expo-font";
 export default function RootLayout() {
   const [fontLoaded] = useFonts({
     'appFontBold': require("./../assets/fonts/Montserrat-Bold.ttf"),
@@ -10,5 +11,8 @@ export default function RootLayout() {
   if (!fontLoaded) {
     return <ActivityIndicator />;
   }
-  return <Stack />;
+  return (
+    <ClerkProvider>
+    <Stack />
+    </ClerkProvider>);
 }
