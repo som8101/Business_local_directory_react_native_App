@@ -1,7 +1,6 @@
 import Colors from "@/services/Colors";
 import { axiosClient } from "@/services/GlobaiApi";
 import { useSSO, useUser } from '@clerk/clerk-expo';
-import axios from 'axios';
 import * as AuthSession from 'expo-auth-session';
 import { useNavigation, useRouter } from "expo-router";
 import * as WebBrowser from 'expo-web-browser';
@@ -39,24 +38,15 @@ try {
     data: {
       fullName: user.user?.fullName,
       email_id: user.user?.primaryEmailAddress?.emailAddress,
-     
     }
   })
   console.log(result.data);
+  router.replace('/(tabs)/Home');
 } catch (e) {
-  if (axios.isAxiosError(e)) {
-    console.log('Axios error status:', e.response?.status);
-    console.log('Axios error data:', e.response?.data);
-    console.log('Request URL:', e.config?.url);
-    console.log('Request method:', e.config?.method);
-    console.log('Request headers:', e.config?.headers);
-    console.log('Request body:', e.config?.data);
-    if (e.response?.status === 405) {
-      console.log('Server responded 405 Method Not Allowed. Allowed methods:', e.response?.headers?.allow || 'Not provided');
-    }
-  } else {
-    console.log(e);
-  }
+  console.log(e);
+///-------------------------------
+  router.replace('/(tabs)/Home');
+//  router.push('/(tabs)/Home');
 }
 
   }
@@ -141,7 +131,8 @@ try {
             fontSize: 15,
           }}>Sign in With Google</Text>
         </TouchableOpacity>
-        <View
+        <TouchableOpacity
+          onPress={() => router.push('/(tabs)/Home')}
           style={[styles.Button, {
             backgroundColor: Colors.primary
             , borderColor: Colors.primary
@@ -151,7 +142,7 @@ try {
             fontFamily: 'appFont',
             fontSize: 15, color: Colors.White
           }}>Skip</Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
     </View>
