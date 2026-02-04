@@ -18,6 +18,13 @@ export const useWarmUpBrowser = () => {
   }, [])
 }
 WebBrowser.maybeCompleteAuthSession()
+/**
+ * Render the welcome screen and manage sign-in, SSO flow, initial user creation, and navigation.
+ *
+ * Hides the native header on mount, calls the backend to create a user record when a Clerk user becomes available, starts the OAuth Google SSO flow when the Google button is pressed, and navigates to the app's Home routes after onboarding or when the user skips.
+ *
+ * @returns The JSX element for the welcome screen component.
+ */
 export default function Index() {
   useWarmUpBrowser()
   const { startSSOFlow } = useSSO()
@@ -172,5 +179,4 @@ const styles = StyleSheet.create({
     marginTop: 20
   }
 })
-
 
