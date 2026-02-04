@@ -30,24 +30,25 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
-    user&&createNewUser();
+    user && createNewUser();
   }, [user]);
-const createNewUser =  async () => {
-try {
-  const result = await axiosClient.post('/user-lists', {
-    data: {
-      fullName: user.user?.fullName,
-      email_id: user.user?.primaryEmailAddress?.emailAddress,
+  const createNewUser = async () => {
+    try {
+      const result = await axiosClient.post('/user-lists', {
+        data: {
+          fullName: user.user?.fullName,
+          email_id: user.user?.primaryEmailAddress?.emailAddress,
+        }
+      })
+      console.log(result.data);
+      router.replace('/(tabs)/Home');
+    } catch (e) {
+      console.log(e);
+      ///-------------------------------
+      // router.replace('/(tabs)/Home');
+      //  router.push('/(tabs)/Home');
+      
     }
-  })
-  console.log(result.data);
-  router.replace('/(tabs)/Home');
-} catch (e) {
-  console.log(e);
-///-------------------------------
-  router.replace('/(tabs)/Home');
-//  router.push('/(tabs)/Home');
-}
 
   }
 
@@ -77,12 +78,12 @@ try {
             if (session?.currentTask) {
               console.log(session?.currentTask)
               // Navigate to Home screen 
-             
+
               return
             }
 
             // Navigate to Home screen 
-            router.push('/')
+            router.push('/(tabs)/Home')
           },
         })
       } else {

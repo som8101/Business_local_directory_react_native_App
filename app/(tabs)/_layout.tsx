@@ -7,7 +7,7 @@ export default function TabLayout() {
 const Navication = useNavigation();
 useEffect(() => {
   Navication.setOptions({
-    headerShown: false,
+    headerShown: false,     
   });
 }, []);
 
