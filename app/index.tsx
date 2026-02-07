@@ -79,6 +79,7 @@ export default function Index() {
               console.log(session?.currentTask)
               // Navigate to Home screen 
 
+              router.push('/(tabs)/Home')
               return
             }
 

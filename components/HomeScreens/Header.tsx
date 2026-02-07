@@ -9,11 +9,19 @@ export default function Header() {
     <View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
       <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 15 }}>
-        <Image source={{ uri: user?.imageUrl }}
-          style={{ width: 50, height: 50, borderRadius: 99 }} />
+        {user?.imageUrl ? (
+          <Image source={{ uri: user?.imageUrl }}
+            style={{ width: 50, height: 50, borderRadius: 99 }} />
+        ) : (
+          <Image source={require('./../../assets/images/google.png')}
+            style={{ width: 50, height: 50, borderRadius: 99 }} />
+        )}
         <View>
           <Text style={styles.heading}>Welcome,</Text>
-          <Text style={styles.heading}>{user?.fullName}</Text>
+          {user?.fullName ? (
+            <Text style={styles.heading}>{user?.fullName}</Text>
+          ) : ( 
+          <Text style={styles.heading}> Guest Name</Text>)}
         </View>
       </View>
       <Image source={require('./../../assets/images/bell.png')}

@@ -14,7 +14,7 @@ export default function Category() {
     }, []);
     
    
-    const [categories, setCategories] = useState<Array<any>>([]);
+    const [categories, setCategories] = useState<CategoryTypes[]>([]);
     console.log("Fetching categori es...");
     const getCategories = async () => {
         // Fetch categories from API or define them statically
@@ -35,6 +35,7 @@ export default function Category() {
         </Text>
         <Text style={{color:Colors.primary, fontFamily:'appFont'}}> View All</Text>
       </View>
+      {/* images  */}
        <FlatList
 
         data={categories}
