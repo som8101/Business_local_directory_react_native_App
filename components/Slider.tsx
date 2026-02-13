@@ -11,7 +11,7 @@ export default function Slider() {
     useEffect(() => {
         GetSlider();
     }, []);
-const port = process.env.EXPO_PUBLIC_PORT;
+
 
 
     const [slider, setSlider] = useState<SliderTypes[]>();

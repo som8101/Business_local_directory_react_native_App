@@ -2,27 +2,26 @@ import Colors from '@/services/Colors';
 import { axiosClient } from '@/services/GlobaiApi';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
-
+export type BusinessTypes = {
+   Name: string;
+   Description: string;
+   premium: boolean;
+   address: string;
+   images: ImagesType[];
+ }
+ type ImagesType = {
+   url: string;
+ }
 export default function PopularBuisness() {
-  type BusinessTypes = {
-    Name: string;
-    Description: string;
-    premium: boolean;
-    address: string;
-    images: ImagesType[];
-  }
-  type ImagesType = {
-    url: string;
-  }
   const [business, setBusiness] = useState<BusinessTypes[]>([]);
 const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    BusinessList();
+    GetBusinessList();
   }, []);
-  const BusinessList = async () => {
+  const GetBusinessList = async () => {
     setLoading(true);
-    const result = await axiosClient.get('/popular-businesses?populate=*');
+    const result = await axiosClient.get('/popular-businesses?filter[premium][$eq]=true&populate=*');
     console.log(JSON.stringify(result.data.data, null, 2));
     setBusiness(result.data.data);
     setLoading(false);
@@ -63,13 +62,8 @@ const [loading, setLoading] = useState(false);
               <View style={{ padding: 10 }}>
                 <Text style={{ fontFamily: 'appFontBold', fontSize: 17 }}>{item?.Name}</Text>
                 <Text style={{ fontFamily: 'appFont', fontSize: 12, marginTop: 5 , color: Colors.Gray}}>{item?.address}</Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                <Image
-                  source={require('./../../assets/images/star.png')}
-                  style={{ width: 20, height: 20}}
-                />
-                  <Text style={{ fontFamily: 'appFont', fontSize: 12, marginTop: 5, color: Colors.Gray }}>4.5</Text>
-                </View>
+                <Star />
+               
               </View>
             </View>
           )}
@@ -78,4 +72,15 @@ const [loading, setLoading] = useState(false);
           {loading&& <ActivityIndicator size="large" color={Colors.primary} style={{ marginTop: 20 }} />}
     </View>
   )
+}
+export function Star(){
+  return (
+
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+                <Image
+                  source={require('./../../assets/images/star.png')}
+                  style={{ width: 20, height: 20}}
+                />
+                  <Text style={{ fontFamily: 'appFont', fontSize: 12, marginTop: 5, color: Colors.Gray }}>4.5</Text>
+                </View>)
 }

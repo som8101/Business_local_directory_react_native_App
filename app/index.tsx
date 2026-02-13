@@ -43,7 +43,7 @@ export default function Index() {
       console.log(result.data);
       router.replace('/(tabs)/Home');
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       ///-------------------------------
       // router.replace('/(tabs)/Home');
       //  router.push('/(tabs)/Home');
