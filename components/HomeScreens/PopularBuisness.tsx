@@ -8,6 +8,9 @@ export type BusinessTypes = {
    premium: boolean;
    address: string;
    images: ImagesType[];
+   phone: string;
+   website: string;
+   id: number;
  }
  type ImagesType = {
    url: string;
