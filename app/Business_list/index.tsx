@@ -72,7 +72,7 @@ const OnSearchFilter=(searchInput:string)=>{
         )}
       />
     </View>
-              {loading&& <ActivityIndicator size="large" color={Colors.primary} style={{ marginTop: 20 }} />}
+              {loading&& <ActivityIndicator size="large" color={Colors.primary} style={{ marginTop: 25 }} />}
     
     </View>
   )

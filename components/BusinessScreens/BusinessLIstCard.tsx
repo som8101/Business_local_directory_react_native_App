@@ -1,6 +1,7 @@
 import Colors from '@/services/Colors';
+import { useRouter } from 'expo-router';
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { BusinessTypes, Star } from '../HomeScreens/PopularBuisness';
 
 type Props = {
@@ -8,8 +9,13 @@ type Props = {
 }
 
 export default function BusinessLIstCard({Business}:Props) {
+  const router = useRouter();
   return (
-    <View 
+    <TouchableOpacity 
+    onPress={()=>router.push({
+      pathname:'/Business_details_Sceen',
+      params: { business:JSON.stringify(Business) }
+    })}
     style={{
         padding:7,
         backgroundColor: Colors.White,
@@ -40,6 +46,6 @@ export default function BusinessLIstCard({Business}:Props) {
         <Text style={{color: Colors.primary, fontFamily: 'appFont', fontSize: 14,}}>View</Text>
        </View>
        </View>
-    </View>
+    </TouchableOpacity>
   )
 }

@@ -80,6 +80,7 @@ export default function Index() {
               // Navigate to Home screen 
 
               router.push('/(tabs)/Home')
+
               return
             }
 
