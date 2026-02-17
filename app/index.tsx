@@ -40,14 +40,15 @@ export default function Index() {
           email_id: user.user?.primaryEmailAddress?.emailAddress,
         }
       })
-      console.log(result.data);
+      // console.log(result.data);
       router.replace('/(tabs)/Home');
     } catch (e) {
       // console.log(e);
+      // router.push('/(tabs)/Home');
       ///-------------------------------
-      // router.replace('/(tabs)/Home');
       //  router.push('/(tabs)/Home');
-      
+
+
     }
 
   }
@@ -76,16 +77,16 @@ export default function Index() {
           // See https://clerk.com/docs/guides/development/custom-flows/authentication/session-tasks
           navigate: async ({ session }) => {
             if (session?.currentTask) {
-              console.log(session?.currentTask)
+              // console.log(session?.currentTask)
               // Navigate to Home screen 
 
-              router.push('/(tabs)/Home')
+              router.replace('/(tabs)/Home')
 
               return
             }
 
             // Navigate to Home screen 
-            router.push('/(tabs)/Home')
+            router.replace('/(tabs)/Home')
           },
         })
       } else {
@@ -135,11 +136,12 @@ export default function Index() {
           }}>Sign in With Google</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => router.push('/(tabs)/Home')}
+          onPress={() => router.replace('/(tabs)/Home')}
           style={[styles.Button, {
             backgroundColor: Colors.primary
             , borderColor: Colors.primary
           }]}>
+
           <Text style={{
             textAlign: 'center',
             fontFamily: 'appFont',
@@ -147,7 +149,6 @@ export default function Index() {
           }}>Skip</Text>
         </TouchableOpacity>
       </View>
-
     </View>
   );
 }

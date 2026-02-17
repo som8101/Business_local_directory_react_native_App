@@ -35,12 +35,13 @@ export default function Business_details_Sceen() {
       );
 
       ToastAndroid.show('Marked busniness favorite!', ToastAndroid.BOTTOM)
+      checkFavMarked();
     }
 
   }
   const checkFavMarked = async () => {
-    const result = await axiosClient.get('user-favorites?fliters[UserEmail][$eq]=' + user?.primaryEmailAddress?.emailAddress + 'fliters[businessId][$eq]=' + businessDetails?.id);
-    // console.log('marked', JSON.stringify(result?.data?.data, null, 2))
+    const result = await axiosClient.get('user-favorites?filters[UserEmail][$eq]=' + user?.primaryEmailAddress?.emailAddress + '&filters[businessId][$eq]=' + businessDetails?.id);
+    console.log('fav result', result?.data?.data);
     const data = result?.data?.data;
     setfavDetails(data[0]);
     if (data?.length > 0) {
