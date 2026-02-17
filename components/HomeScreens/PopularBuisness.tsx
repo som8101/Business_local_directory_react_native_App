@@ -1,31 +1,32 @@
 import Colors from '@/services/Colors';
 import { axiosClient } from '@/services/GlobaiApi';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 export type BusinessTypes = {
-   Name: string;
-   Description: string;
-   premium: boolean;
-   address: string;
-   images: ImagesType[];
-   phone: string;
-   website: string;
-   id: number;
- }
- type ImagesType = {
-   url: string;
- }
+  Name: string;
+  Description: string;
+  premium: boolean;
+  address: string;
+  images: ImagesType[];
+  phone: string;
+  website: string;
+  id: number;
+}
+type ImagesType = {
+  url: string;
+}
 export default function PopularBuisness() {
   const [business, setBusiness] = useState<BusinessTypes[]>([]);
-const [loading, setLoading] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     GetBusinessList();
   }, []);
   const GetBusinessList = async () => {
     setLoading(true);
     const result = await axiosClient.get('/popular-businesses?filter[premium][$eq]=true&populate=*');
-    console.log(JSON.stringify(result.data.data, null, 2));
+    // console.log(JSON.stringify(result.data.data, null, 2));
     setBusiness(result.data.data);
     setLoading(false);
   }
@@ -44,14 +45,26 @@ const [loading, setLoading] = useState(false);
           data={business}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          style={{backgroundColor: Colors.White, borderBottomLeftRadius: 15, borderBottomRightRadius: 15 }}
+
+          style={{ backgroundColor: Colors.White, borderBottomLeftRadius: 15, borderBottomRightRadius: 15 }}
           // keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
-            <View style={{
-              width: 230,
-              marginRight: 15
+            <TouchableOpacity
+              onPress={() => {
+                router.push(
+                  {
+                    pathname: '/Business_details_Sceen',
+                    params: {
+                      business: JSON.stringify(item)
+                    }
+                  }
+                )
+              }}
+              style={{
+                width: 230,
+                marginRight: 15
 
-            }}>
+              }}>
               <Image
                 source={{ uri: item.images[0].url }}
                 style={{
@@ -64,26 +77,26 @@ const [loading, setLoading] = useState(false);
               />
               <View style={{ padding: 10 }}>
                 <Text style={{ fontFamily: 'appFontBold', fontSize: 17 }}>{item?.Name}</Text>
-                <Text style={{ fontFamily: 'appFont', fontSize: 12, marginTop: 5 , color: Colors.Gray}}>{item?.address}</Text>
+                <Text style={{ fontFamily: 'appFont', fontSize: 12, marginTop: 5, color: Colors.Gray }}>{item?.address}</Text>
                 <Star />
-               
+
               </View>
-            </View>
+            </TouchableOpacity>
           )}
         />
       </View>
-          {loading&& <ActivityIndicator size="large" color={Colors.primary} style={{ marginTop: 20 }} />}
+      {loading && <ActivityIndicator size="large" color={Colors.primary} style={{ marginTop: 20 }} />}
     </View>
   )
 }
-export function Star(){
+export function Star() {
   return (
 
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                <Image
-                  source={require('./../../assets/images/star.png')}
-                  style={{ width: 20, height: 20}}
-                />
-                  <Text style={{ fontFamily: 'appFont', fontSize: 12, marginTop: 5, color: Colors.Gray }}>4.5</Text>
-                </View>)
+      <Image
+        source={require('./../../assets/images/star.png')}
+        style={{ width: 20, height: 20 }}
+      />
+      <Text style={{ fontFamily: 'appFont', fontSize: 12, marginTop: 5, color: Colors.Gray }}>4.5</Text>
+    </View>)
 }

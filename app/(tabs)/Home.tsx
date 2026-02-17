@@ -11,24 +11,26 @@ export default function Home() {
     // header component
     <FlatList
       data={[]}
+
       renderItem={null}
-      ListHeaderComponent={ (    
-    <View style={{ paddingTop: 38, padding: 20 }}>
-      <View style={{
-         height: 300,
-         width: '200%',
-          backgroundColor: Colors.primary,
-          position : 'absolute'   }}></View>
-      <Header />
-    
-    { /*Slider component*/}
-        <Slider />
-    { /*Catagory component*/}
-        
-        <Category />
-   { /* popular buisness*/}
-        <PopularBuisness />
-        <View style={{ height: 100 }}></View>
-    </View>)}/>
+      ListHeaderComponent={(
+        <View style={{ paddingTop: 38, padding: 20 }}>
+          <View style={{
+            height: 300,
+            width: '200%',
+            backgroundColor: Colors.primary,
+            position: 'absolute'
+          }}></View>
+          <Header />
+
+          { /*Slider component*/}
+          <Slider />
+          { /*Catagory component*/}
+
+          <Category />
+          { /* popular buisness*/}
+          <PopularBuisness />
+          <View style={{ height: 20 }}></View>
+        </View>)} />
   )
 }
