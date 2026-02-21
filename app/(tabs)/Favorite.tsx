@@ -1,7 +1,7 @@
 import BusinessLIstCard from '@/components/BusinessScreens/BusinessLIstCard';
 import { BusinessTypes } from '@/components/HomeScreens/PopularBuisness';
 import Colors from '@/services/Colors';
-import { axiosClient } from '@/services/GlobaiApi';
+import { axiosClient } from '@/services/GlobalApi';
 import { useUser } from '@clerk/clerk-expo';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';

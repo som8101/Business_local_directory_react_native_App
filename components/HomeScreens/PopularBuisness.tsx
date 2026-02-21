@@ -1,5 +1,5 @@
 import Colors from '@/services/Colors';
-import { axiosClient } from '@/services/GlobaiApi';
+import { axiosClient } from '@/services/GlobalApi';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
