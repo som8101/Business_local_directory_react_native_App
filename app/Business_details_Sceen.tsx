@@ -2,7 +2,7 @@ import ActionButtonSection from '@/components/ActionButtonSection';
 import BusinessDetailsDescritopn from '@/components/BusinessDetailsDescritopn';
 import BusinessDetilsInfo from '@/components/BusinessDetilsInfo';
 import Colors from '@/services/Colors';
-import { axiosClient } from '@/services/GlobaiApi';
+import { axiosClient } from '@/services/GlobalApi';
 import { useUser } from '@clerk/clerk-expo';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useLocalSearchParams, useRouter } from 'expo-router';

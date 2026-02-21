@@ -1,5 +1,5 @@
 import Colors from "@/services/Colors";
-import { axiosClient } from "@/services/GlobaiApi";
+import { axiosClient } from "@/services/GlobalApi";
 import { useSSO, useUser } from '@clerk/clerk-expo';
 import * as AuthSession from 'expo-auth-session';
 import { useNavigation, useRouter } from "expo-router";
@@ -30,14 +30,15 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
-    user && createNewUser();
+    user && user.isSignedIn && user.user && createNewUser();
   }, [user]);
+
   const createNewUser = async () => {
     try {
       const result = await axiosClient.post('/user-lists', {
         data: {
-          fullName: user.user?.fullName,
-          email_id: user.user?.primaryEmailAddress?.emailAddress,
+          fullName: user?.user?.fullName,
+          email_id: user?.user?.primaryEmailAddress?.emailAddress,
         }
       })
       // console.log(result.data);
@@ -53,20 +54,19 @@ export default function Index() {
 
   }
 
+
+
   const onPress = useCallback(async () => {
     try {
-
-      const redirectUrl = AuthSession.makeRedirectUri({
-        scheme: "localdirectory",
-        path: "sso-callback",
-      });
-      // Start the authentication process by calling `startSSOFlow()`
       const { createdSessionId, setActive, signIn, signUp } = await startSSOFlow({
         strategy: 'oauth_google',
         // For web, defaults to current path
         // For native, you must pass a scheme, like AuthSession.makeRedirectUri({ scheme, path })
         // For more info, see https://docs.expo.dev/versions/latest/sdk/auth-session/#authsessionmakeredirecturioptions
-        redirectUrl: AuthSession.makeRedirectUri(),
+        redirectUrl: AuthSession.makeRedirectUri({
+          scheme: "localdirectory",
+          path: "sso-callback",
+        }),
       })
 
       // If sign in was successful, set the active session
@@ -80,13 +80,13 @@ export default function Index() {
               // console.log(session?.currentTask)
               // Navigate to Home screen 
 
-              router.replace('/(tabs)/Home')
+              router.push('/(tabs)/Home')
 
               return
             }
 
             // Navigate to Home screen 
-            router.replace('/(tabs)/Home')
+            router.push('/(tabs)/Home')
           },
         })
       } else {
@@ -97,9 +97,9 @@ export default function Index() {
     } catch (err) {
       // See https://clerk.com/docs/guides/development/custom-flows/error-handling
       // for more info on error handling
-      console.error(JSON.stringify(err, null, 2))
+      // console.error(JSON.stringify(err, null, 2))
     }
-  }, [])
+  }, [startSSOFlow, router])
   return (
     <View
       style={

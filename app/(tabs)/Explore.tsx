@@ -1,6 +1,6 @@
 import { BusinessTypes, Star } from '@/components/HomeScreens/PopularBuisness';
 import Colors from '@/services/Colors';
-import { axiosClient } from '@/services/GlobaiApi';
+import { axiosClient } from '@/services/GlobalApi';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
