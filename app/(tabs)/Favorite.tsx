@@ -6,6 +6,11 @@ import { useUser } from '@clerk/clerk-expo';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 
+/**
+ * Renders the Favorite tab UI.
+ *
+ * @returns A JSX element displaying a container with the text "Favorite".
+ */
 export default function Favorite() {
   const { user } = useUser();
   const [businesslist, setBusinessList] = useState<BusinessTypes[]>([]);

@@ -5,6 +5,13 @@ import React from 'react';
 import { FlatList, Image, Linking, Share, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../../services/Colors';
 
+/**
+ * Renders the Profile screen UI.
+ *
+ * Displays a root View containing a Text element with the label "Profile".
+ *
+ * @returns A React element representing the Profile screen.
+ */
 export default function Profile() {
   const { user } = useUser();
   const { signOut } = useAuth();

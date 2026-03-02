@@ -7,6 +7,11 @@ import React from 'react'
 import { FlatList, View } from 'react-native'
 
 
+/**
+ * Renders the Home screen UI.
+ *
+ * @returns A React element containing a View with a Text node displaying "Home".
+ */
 export default function Home() {
   return (
     // header component

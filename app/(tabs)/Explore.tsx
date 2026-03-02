@@ -6,6 +6,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 
+/**
+ * Render the Explore screen.
+ *
+ * Displays a simple view containing the static text "Explore".
+ *
+ * @returns A React element representing the Explore screen UI.
+ */
 export default function Explore() {
   const [loading, setLoading] = useState(false);
   const [businesslist, setBusinessList] = useState<BusinessTypes[]>([]);
